@@ -56,7 +56,7 @@ EXPOSE 6006
 # IPython
 EXPOSE 8888
 
-ENV PYTHONPATH $PYTHONPATH:/tensorflow_models:tensorflow_models/slim
+ENV PYTHONPATH /tensorflow_models:/tensorflow_models/slim:$PYTHONPATH
 
 WORKDIR "/notebooks"
 
