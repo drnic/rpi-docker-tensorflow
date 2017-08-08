@@ -1,4 +1,4 @@
-FROM resin/rpi-raspbian
+FROM fjctp/armhf-ros-kinetic-base:latest
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
         build-essential \
@@ -11,8 +11,13 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         python-dev \
         python-numpy \
         python-scipy \
+        python-pil \
+        python-lxml \
         rsync \
-        unzip
+        unzip \
+        protobuf-compiler \
+        ros-kinetic-cv-bridge \
+        ros-kinetic-web-video-server
 
 RUN  apt-get clean && \
         rm -rf /var/lib/apt/lists/*
@@ -31,6 +36,10 @@ ADD tensorflow-0.10.0-cp27-none-linux_armv7l.whl .
 
 RUN pip install tensorflow-0.10.0-cp27-none-linux_armv7l.whl
 
+COPY models /tensorflow_models
+RUN /bin/bash -c "cd /tensorflow_models && \
+                  protoc object_detection/protos/*.proto --python_out=."
+
 COPY jupyter_notebook_config.py /root/.jupyter/
 
 # Copy sample notebooks.
@@ -45,6 +54,8 @@ COPY run_jupyter.sh /
 EXPOSE 6006
 # IPython
 EXPOSE 8888
+
+ENV PYTHONPATH $PYTHONPATH:/tensorflow_models:tensorflow_models/slim
 
 WORKDIR "/notebooks"
 
