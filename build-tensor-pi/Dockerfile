@@ -16,6 +16,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         rsync \
         unzip \
         protobuf-compiler \
+        ros-kinetic-cv-camera \
         ros-kinetic-cv-bridge \
         ros-kinetic-web-video-server
 
