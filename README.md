@@ -44,6 +44,7 @@ hostname of the Pi on which the docker image is running, or on
 ## Port
 
 8080 - Web-Video-Server
+
 8888 - Jupyter Notebook
 
 ## Stopping the image
