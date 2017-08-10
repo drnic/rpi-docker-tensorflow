@@ -49,8 +49,10 @@ hostname of the Pi on which the docker image is running, or on
 
 ## Stopping the image
 
-`docker ps`
-`docker stop containerID`
+```
+docker ps
+docker stop containerID
+```
 
 or
 
