@@ -51,6 +51,10 @@ COPY notebooks /notebooks
 # We just add a little wrapper script.
 COPY run_jupyter.sh /
 
+ADD object_detection_ROS.py /
+COPY run_detection.sh /
+COPY mobilenet /mobilenet
+
 # TensorBoard
 EXPOSE 6006
 # IPython
@@ -58,6 +62,6 @@ EXPOSE 8888
 
 ENV PYTHONPATH /tensorflow_models:/tensorflow_models/slim:$PYTHONPATH
 
-WORKDIR "/notebooks"
+WORKDIR "/"
 
-CMD ["/run_jupyter.sh", "--allow-root"]
+CMD ["/run_detection.sh"]
